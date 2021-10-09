@@ -18,6 +18,8 @@ const Route = use('Route')
 
 Route.on('/').render('home')
 
+Route.on('/add').render('add')
+
 Route.get('/', () => {
     return 'Hello world'
 })

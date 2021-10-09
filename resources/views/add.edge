@@ -1,0 +1,23 @@
+@layout('main')
+@section('container')
+
+<form action="{{ route('/add') }}" method="POST">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control is-invalid" id="title" placeholder="Digite titulo">
+        <div class="invalid-feedback">
+            error!
+        </div>  
+    </div>
+      <div class="mb-3">
+        <label for="body" class="form-label">Body</label>
+        <textarea class="form-control is-invalid" id="body" rows="3"></textarea>
+      </div>
+      <div class="invalid-feedback">
+          error!
+    </div>
+    <button type="submmit" class="btn btn-primary">Enviar</button>
+</form>
+
+
+@endsection
