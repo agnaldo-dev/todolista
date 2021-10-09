@@ -24,4 +24,6 @@ Route.get('/', () => {
     return 'Hello world'
 })
 
-Route.get('/task', 'TaskController.index')
+Route.get('/tasks', 'TaskController.index')
+Route.post('/add', 'TaskController.store')
+Route.get('/task/:id', 'TaskController.detail')
