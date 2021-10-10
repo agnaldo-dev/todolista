@@ -2,19 +2,49 @@
 
 const Task = use("App/Models/Task")
 
-
 //const { validateAll } = use('Validator')
 
 class TaskController {
+    /*
+        async index({ view, request }) {
 
-    async index({ view }) {
+             const lista = await Task.all()
 
-        const lista = await Task.all()
+               return view.render('tasks', {
+                 title: 'Lista de Tarefas',
+                 lista: lista.toJSON()
+             })
 
-        return view.render('tasks', {
-            title: 'Pagina de teste',
-            lista: lista.toJSON()
-        })
+        }
+        */
+
+    async index({ params, response, view, session }) {
+        try {
+            const pageNumber = params.page === 'NaN' ? 1 : params.page
+                //    console.log('params', params)
+
+            const tasks = await Task.query()
+                .orderBy("id", "desc")
+                .paginate(pageNumber, 3)
+
+            //    console.log('tasks', tasks)
+
+            return view.render('tasks', {
+                title: 'Lista de Tarefas',
+                tasks: tasks.toJSON()
+            })
+
+        } catch (error) {
+            console.log(error)
+
+            session.flash({
+                notification: {
+                    message: "Failed to fetch all articles",
+                },
+            })
+
+            return response.redirect("back");
+        }
     }
 
     async store({ request, response, session }) {

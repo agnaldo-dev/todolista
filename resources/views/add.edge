@@ -4,14 +4,14 @@
 <form action="{{ route('/add') }}" method="POST">
     {{ csrfField() }}
     <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+        <label for="title" class="form-label">Título</label>
         <input type="text" class="form-control is-invalid" name="title" id="title" 
         placeholder="Digite titulo" {{ hasErrorFor('title') ? 'is-invalid' : '' }}>
         {{ elIf('<div class="invalid-feedback">$self</div>',getErrorFor('title'),hasErrorFor('title')) }}
           
     </div>
       <div class="mb-3">
-        <label for="body" class="form-label">Body</label>
+        <label for="body" class="form-label">Descrição</label>
         <textarea class="form-control is-invalid" name="body" id="body" rows="3"
          {{ hasErrorFor('title') ? 'is-invalid' : '' }}>
          {{ elIf('<div class="invalid-feedback">$self</div>',getErrorFor('body'),hasErrorFor('body')) }}

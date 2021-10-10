@@ -1,17 +1,33 @@
 @layout('main')
 @section('container')
 
-<h1>{{ title }}</h1>
+<div id="row">
 
-@if(old('notification'))
-<div class="alert alert-success" role="alert">
-    {{ old('notification') }}
-</div>
-@endif
+  <h1>{{ title }}</h1>
 
-<div class="list-group">
-    @each(item in lista)
-        <a href="/task/{{ item.id }}" class="list-group-item list-group-item-action">{{ item.title }}<a>
-    @endeach
+  @if(old('notification'))
+  <div class="alert alert-success" role="alert">
+      {{ old('notification') }}
+  </div>
+  @endif
+  <h1 class="text-center">Page {{ tasks.page }} of {{ tasks.lastPage }}</h1>
+  <div class="list-group">
+      @each(item in tasks.data)
+          <a href="/task/{{ item.id }}" class="list-group-item list-group-item-action">{{ item.title }}<a>
+      @endeach
+  </div>
+  
+  
+<div id="col-md-12">
+  <div class="pagination justify-content-center pagination-md-5" style="padding:5px">
+    <a href="{{ tasks.page == 1 ? '#' : route('tasks', { page: tasks.page - 1}) }}" rel="prev" 
+    class="btn btn-primary">Previous</a>
+    <p class="ml-2 mr-4" style="padding:15px">Page {{ tasks.page }} of {{ tasks.lastPage }}</p>
+    <a href="{{ tasks.lastPage == tasks.page ? '#' : route('tasks', { page: tasks.page + 1}) }}" 
+    class="btn btn-primary">Next</a>
+  </div>
 </div>
+  
+</div>
+
 @endsection
